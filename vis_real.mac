@@ -9,6 +9,7 @@
 
 /rat/db/set GEO[substrate] material "Acrylic"
 /rat/db/set GEO[substrate] color [0.0,1.0,0.0,0.1]
+#/rat/db/set GEO[substrate] color [1.0, 0.0, 0.0, 0.4] # novaina rouge ny couleur
 
 # this part is the optical surface
 # sigma_alpha works with "unified" model
@@ -73,7 +74,7 @@
 /vis/open OGLSQt
 # Publication background: very light gray (easier on the eyes than pure white,
 # still prints cleanly). Use `1 1 1` if you want pure white.
-/vis/viewer/set/background 0.97 0.97 0.97
+/vis/viewer/set/background 0 0 0 #novina natao mainty be ty(ito izany ilay background)
 
 # Create the scene FIRST, so subsequent /vis/geometry/set/* commands have a
 # scene context and don't emit "Scene 'none' not found" warnings.
@@ -189,7 +190,7 @@
 #/generator/pos/set -12.6 0.0 0.0
 
 /generator/add combo pbomb:fill:poisson
-/generator/vtx/set 2 128 # 2 photons per event, 128 nm
+/generator/vtx/set 10 128 # 2 photons per event, 128 nm (novaina eto)
 /generator/pos/set -12.701 0.0 0.0
 
 ##### RUN ###########

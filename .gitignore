@@ -10,3 +10,5 @@ Config.hh
 ptp.sh
 snapshots/
 *.png
+examples/*
+plotter/*

@@ -155,8 +155,8 @@ void HitmanProc::Optimize(std::vector<double> seed, RAT::DS::FitResult* fit) {
   } catch (std::exception& e) {
     std::cout << "nlopt failed: " << e.what() << std::endl;
   }
-  fit->SetBoolFigureOfMerit("FitValid", fitsuccess);
-  fit->SetDoubleFigureOfMerit("NLLH", minf);
+  fit->SetFigureOfMerit("FitValid", fitsuccess);
+  fit->SetFigureOfMerit("NLLH", minf);
   fit->SetPosition(fitPosition);
   fit->SetDirection(fitDirection);
   fit->SetEnergy(fitEnergy);

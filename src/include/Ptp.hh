@@ -21,6 +21,7 @@ namespace PTP {
 class Ptp : public RAT::Rat {
  public:
   Ptp(RAT::AnyParse* parser, int argc, char** argv);
+  void Configure() override;
 };
 
 }  // namespace PTP

@@ -1,3 +1,5 @@
+// every thing in the simulation
+
 {
 name: "GEO",
 index: "world",
@@ -9,6 +11,9 @@ size: [700.0, 700.0, 700.0], // mm, half-length
 material: "air",
 invisible: 1,
 }
+
+// the box that we see(the liquide argon)
+
 {
 name: "GEO",
 index: "inner_surface",
@@ -22,9 +27,11 @@ material: "LAr",
 color:[0.42, 0.47, 0.57, 0.3] // blue
 drawstyle: "solid"
 }
+
 // Daughter layer: Substrate (Acrylic) (6 mm thick → half-thickness = 3 mm)
 // Positioned on the leftmost side of the layered structure.
 // It extends from x = -12.5 to -6.5 mm (center at -9.5 mm).
+
 {
   name: "GEO",
   index: "substrate",
@@ -39,6 +46,7 @@ drawstyle: "solid"
   color:[0.0, 1.0, 0.0, 0.1],
   drawstyle: "solid",
 }
+
 #generation_volume, where the photon are generated
 {
   name: "GEO",
@@ -95,21 +103,6 @@ drawstyle: "solid"
   color:[0.0, 0.0, 1.0, 0.0]
   drawstyle: "solid"
 }
-
-//{
-//  name: "GEO",
-//  index: "LArGap",
-//  valid_begin: [0.0, 0.0],
-//  valid_end: [0.0, 0.0],
-//  mother: "inner_surface",
-//  type: "box",
-//  size: [1.0, 225.0, 247.5],
-//  position: [-5.5, 0.0, 0.0],
-//  material: "LAr", // Pre-defined in ratpac-two
-//  //material: "EJ286", // Manually defined
-//  color:[1.0, 0.5, 0.0, 0.0] // green
-//  drawstyle: "solid"
-//}
 
 // Daughter layer: Reflector (1 mm thick → half-thickness = 0.5 mm)
 // Positioned on the far right, leaving no gap between WLS and Reflector.
@@ -212,8 +205,8 @@ drawstyle: "solid"
 
 
 
-
- // Putting SiPMs and reflector at the first (right next to pTP) layer
+// ////////////////////////////////////////////////////////////////////////
+// // Putting SiPMs and reflector at the first (right next to pTP) layer
  {
   name: "GEO",
   index: "sipm_side2",
@@ -228,6 +221,7 @@ drawstyle: "solid"
   color: [0.8, 0.8, 0.8, 0.3] 
   orientation: "manual",
  }
+
  {
   name: "GEO",
   index: "reflector2",
@@ -254,6 +248,7 @@ drawstyle: "solid"
   color: [1.0, 1.0, 1.0, 0.2],
   drawstyle: "solid"
  }
+
  {
   name: "GEO",
   index: "reflector2_zneg",
@@ -267,6 +262,7 @@ drawstyle: "solid"
   color: [1.0, 1.0, 1.0, 0.2],
   drawstyle: "solid"
  }
+
  {
   name: "GEO",
   index: "reflector2_ypos",

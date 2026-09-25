@@ -1,0 +1,139 @@
+#------------------------------------------------------------
+# runPhotonBombNextToFirstLayer.mac
+#
+# This macro launches a photon bomb of 128 nm optical photons from a
+# position adjacent to the innermost (PTP) layer—specifically, on the side
+# farthest from the reflector.
+#
+# Geometry assumptions (all positions in mm):
+#   Overall container (LAr_main) contains five adjacent layers arranged along the x-axis:
+#     PTP:      x from -12.5 to -6.5  (center at -9.5 mm)
+#     LAr_gap1: x from -6.5 to -0.5   (center at -3.5 mm)
+#     WLS:      x from -0.5 to +5.5   (center at +2.5 mm)
+#     LAr_gap2: x from +5.5 to +11.5  (center at +8.5 mm)
+#     Reflector: x from +11.5 to +12.5 (center at +12.0 mm)
+#
+# The photon bomb is generated at x = -13.0 mm (just left of the PTP layer),
+# y = 0, z = 0.
+#
+# All photon energies are in SI units (Joules) and 128 nm corresponds to ~1.55e-18 J.
+#------------------------------------------------------------
+
+/glg4debug/glg4param omit_muon_processes  0.0
+/glg4debug/glg4param omit_hadronic_processes  0.0
+
+#set the detector parameters
+/rat/db/set DETECTOR experiment "Ptp"
+/rat/db/set DETECTOR geo_file "Ptp/ptp2.geo"
+
+/rat/db/set GEO[inner_surface] material "LAr"
+
+/rat/db/set GEO[substrate] material "Acrylic" ## default: Acrylic
+/rat/db/set GEO[substrate] color [0.0,1.0,0.0,0.1]
+
+# this part is the optical surface
+# sigma_alpha works with "unified" model
+# poslish works with "glisur" model
+# finish options are here: https://apc.u-paris.fr/~franco/g4doxy/html/G4OpticalSurface_8hh.html
+
+/rat/db/set GEO[PTP] surface_type "dielectric_dielectric"
+#/rat/db/set GEO[PTP] finish "ground"  #just comment it if you want to have a polished finish
+/rat/db/set GEO[PTP] model "unified"
+/rat/db/set GEO[PTP] polish 1.0
+/rat/db/set GEO[PTP] sigma_alpha 0.0
+
+/rat/db/set GEO[PTP] position [-2.998,0.0,0.0] # in mm
+/rat/db/set GEO[PTP] box_length 0.002 # 2um thickness
+
+# /rat/db/set GEO[PTP] position [-2.9996,0.0,0.0] # in mm
+# /rat/db/set GEO[PTP] box_length 0.0004 # 0.4um thickness
+
+# /rat/db/set GEO[PTP] position [-2.996,0.0,0.0] # in mm
+# /rat/db/set GEO[PTP] box_length 0.004 # 4um thickness
+
+#/rat/db/set GEO[PTP] position [-2.95,0.0,0.0] # in mm
+#/rat/db/set GEO[PTP] box_length 0.050 # 50um thickness
+
+#/rat/db/set GEO[PTP] position [7.5,0.0,0.0] # in mm
+/rat/db/set GEO[PTP] coating_material "PTP"
+/rat/db/set GEO[PTP] material "PTP"
+
+/rat/db/set GEO[genVol] mother "inner_surface"
+/rat/db/set GEO[genVol] type "box"
+/rat/db/set GEO[genVol] material "air"
+/rat/db/set GEO[genVol] size [0.001,225.0,247.5]
+/rat/db/set GEO[genVol] position [-12.701,0.0,0.0]
+
+#/rat/db/set GEO[sipm_side] efficiency_correction 1
+
+/rat/db/set GEO[WLS] material "eljen_WLSP" ## default: eljen_WLSP
+/rat/db/set GEO[WLS] color [0.0,1.0,0.0,0.1]
+
+/rat/db/set GEO[reflector] coating_material "Reflect"
+/rat/db/set GEO[reflector_zpos] coating_material "Reflect"
+/rat/db/set GEO[reflector_zneg] coating_material "Reflect"
+/rat/db/set GEO[reflector_ypos] coating_material "Reflect"
+/rat/db/set GEO[reflector_yneg] coating_material "Reflect"
+
+# /rat/db/set GEO[reflector2] coating_material "Reflect"
+# /rat/db/set GEO[reflector2_zpos] coating_material "Reflect"
+# /rat/db/set GEO[reflector2_zneg] coating_material "Reflect"
+# /rat/db/set GEO[reflector2_ypos] coating_material "Reflect"
+# /rat/db/set GEO[reflector2_yneg] coating_material "Reflect"
+
+#/rat/db/set GEO[reflector] surface_type "dielectric_metal"
+#/rat/db/set GEO[reflector_zpos] surface_type "dielectric_metal"
+#/rat/db/set GEO[reflector_zneg] surface_type "dielectric_metal"
+#/rat/db/set GEO[reflector_ypos] surface_type "dielectric_metal"
+#/rat/db/set GEO[reflector_yneg] surface_type "dielectric_metal"
+#
+#/rat/db/set GEO[reflector] finish "ground"
+#/rat/db/set GEO[reflector_zpos] finish "ground"
+#/rat/db/set GEO[reflector_zneg] finish "ground"
+#/rat/db/set GEO[reflector_ypos] finish "ground"
+#/rat/db/set GEO[reflector_yneg] finish "ground"
+#
+#/rat/db/set GEO[reflector] model "unified"
+#/rat/db/set GEO[reflector_zpos] model "unified"
+#/rat/db/set GEO[reflector_zneg] model "unified"
+#/rat/db/set GEO[reflector_ypos] model "unified"
+#/rat/db/set GEO[reflector_yneg] model "unified"
+#
+#/rat/db/set GEO[reflector] sigma_alpha 0.0
+#/rat/db/set GEO[reflector_zpos] sigma_alpha 0.0
+#/rat/db/set GEO[reflector_zneg] sigma_alpha 0.0
+#/rat/db/set GEO[reflector_ypos] sigma_alpha 0.0
+#/rat/db/set GEO[reflector_yneg] sigma_alpha 0.0
+
+#/rat/db/set GEO[reflector2_zpos] material "Reflect"
+#/rat/db/set GEO[reflector2_zneg] material "Reflect"
+#/rat/db/set GEO[reflector2_ypos] material "Reflect"
+#/rat/db/set GEO[reflector2_yneg] material "Reflect"
+#/rat/db/set GEO[reflector2] material "Reflect"
+
+/run/initialize
+/tracking/storeTrajectory 1
+
+# BEGIN EVENT LOOP
+/rat/proc splitevdaq
+/rat/proc count
+/rat/procset update 10
+
+/rat/proclast outntuple
+
+##### GENERATORS #################
+
+#/generator/add combo gun:point:poisson
+#/generator/vtx/set e- 1.0 0.0 0.0 2.0
+#/generator/pos/set -20.0 0.0 0.0
+
+#/generator/add combo pbomb:point:poisson
+#/generator/vtx/set 1000 128 # 1000 photons, 128nm
+#/generator/pos/set -12.701 0.0 0.0
+
+/generator/add combo pbomb:fill:poisson
+/generator/vtx/set 10000 128 # 1_000_000 photon, 128nm
+/generator/pos/set -12.701 0.0 0.0
+
+# Begin the run (100 events)
+/run/beamOn 100 #1 event
